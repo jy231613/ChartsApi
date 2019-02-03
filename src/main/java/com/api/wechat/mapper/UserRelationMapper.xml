@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.api.wechat.mapper.UserRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.api.wechat.model.UserRelation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="comeid" property="comeid" jdbcType="INTEGER" />
+    <result column="headforid" property="headforid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="happentime" property="happentime" jdbcType="TIMESTAMP" />
+    <result column="comename" property="comename" jdbcType="VARCHAR" />
+    <result column="headforname" property="headforname" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, comeid, headforid, status, happentime, comename, headforname, updatetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.api.wechat.model.UserRelationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from charts_user_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from charts_user_relation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from charts_user_relation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.api.wechat.model.UserRelationExample" >
+    delete from charts_user_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.api.wechat.model.UserRelation" >
+    insert into charts_user_relation (id, comeid, headforid, 
+      status, happentime, comename, 
+      headforname, updatetime)
+    values (#{id,jdbcType=INTEGER}, #{comeid,jdbcType=INTEGER}, #{headforid,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{happentime,jdbcType=TIMESTAMP}, #{comename,jdbcType=VARCHAR}, 
+      #{headforname,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.api.wechat.model.UserRelation" >
+    insert into charts_user_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="comeid != null" >
+        comeid,
+      </if>
+      <if test="headforid != null" >
+        headforid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="happentime != null" >
+        happentime,
+      </if>
+      <if test="comename != null" >
+        comename,
+      </if>
+      <if test="headforname != null" >
+        headforname,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="comeid != null" >
+        #{comeid,jdbcType=INTEGER},
+      </if>
+      <if test="headforid != null" >
+        #{headforid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="happentime != null" >
+        #{happentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comename != null" >
+        #{comename,jdbcType=VARCHAR},
+      </if>
+      <if test="headforname != null" >
+        #{headforname,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.api.wechat.model.UserRelationExample" resultType="java.lang.Integer" >
+    select count(*) from charts_user_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update charts_user_relation
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.comeid != null" >
+        comeid = #{record.comeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.headforid != null" >
+        headforid = #{record.headforid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.happentime != null" >
+        happentime = #{record.happentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.comename != null" >
+        comename = #{record.comename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headforname != null" >
+        headforname = #{record.headforname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update charts_user_relation
+    set id = #{record.id,jdbcType=INTEGER},
+      comeid = #{record.comeid,jdbcType=INTEGER},
+      headforid = #{record.headforid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      happentime = #{record.happentime,jdbcType=TIMESTAMP},
+      comename = #{record.comename,jdbcType=VARCHAR},
+      headforname = #{record.headforname,jdbcType=VARCHAR},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.api.wechat.model.UserRelation" >
+    update charts_user_relation
+    <set >
+      <if test="comeid != null" >
+        comeid = #{comeid,jdbcType=INTEGER},
+      </if>
+      <if test="headforid != null" >
+        headforid = #{headforid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="happentime != null" >
+        happentime = #{happentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comename != null" >
+        comename = #{comename,jdbcType=VARCHAR},
+      </if>
+      <if test="headforname != null" >
+        headforname = #{headforname,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.api.wechat.model.UserRelation" >
+    update charts_user_relation
+    set comeid = #{comeid,jdbcType=INTEGER},
+      headforid = #{headforid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      happentime = #{happentime,jdbcType=TIMESTAMP},
+      comename = #{comename,jdbcType=VARCHAR},
+      headforname = #{headforname,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

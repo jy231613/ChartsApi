@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.api.wechat.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.api.wechat.model.UserInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="userpic" property="userpic" jdbcType="VARCHAR" />
+    <result column="chartn" property="chartn" jdbcType="VARCHAR" />
+    <result column="mans" property="mans" jdbcType="INTEGER" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="withqq" property="withqq" jdbcType="VARCHAR" />
+    <result column="withemail" property="withemail" jdbcType="VARCHAR" />
+    <result column="countryn" property="countryn" jdbcType="INTEGER" />
+    <result column="provincen" property="provincen" jdbcType="INTEGER" />
+    <result column="cityn" property="cityn" jdbcType="INTEGER" />
+    <result column="remake" property="remake" jdbcType="VARCHAR" />
+    <result column="circlepic" property="circlepic" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="viplv" property="viplv" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="bannedtime" property="bannedtime" jdbcType="TIMESTAMP" />
+    <result column="standby" property="standby" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, userpic, chartn, mans, password, phone, withqq, withemail, countryn, 
+    provincen, cityn, remake, circlepic, status, viplv, createtime, updatetime, bannedtime, 
+    standby
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.api.wechat.model.UserInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from charts_user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from charts_user_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from charts_user_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.api.wechat.model.UserInfoExample" >
+    delete from charts_user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.api.wechat.model.UserInfo" >
+    insert into charts_user_info (id, username, userpic, 
+      chartn, mans, password, 
+      phone, withqq, withemail, 
+      countryn, provincen, cityn, 
+      remake, circlepic, status, 
+      viplv, createtime, updatetime, 
+      bannedtime, standby)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpic,jdbcType=VARCHAR}, 
+      #{chartn,jdbcType=VARCHAR}, #{mans,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{withqq,jdbcType=VARCHAR}, #{withemail,jdbcType=VARCHAR}, 
+      #{countryn,jdbcType=INTEGER}, #{provincen,jdbcType=INTEGER}, #{cityn,jdbcType=INTEGER}, 
+      #{remake,jdbcType=VARCHAR}, #{circlepic,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{viplv,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{bannedtime,jdbcType=TIMESTAMP}, #{standby,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.api.wechat.model.UserInfo" >
+    insert into charts_user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="userpic != null" >
+        userpic,
+      </if>
+      <if test="chartn != null" >
+        chartn,
+      </if>
+      <if test="mans != null" >
+        mans,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="withqq != null" >
+        withqq,
+      </if>
+      <if test="withemail != null" >
+        withemail,
+      </if>
+      <if test="countryn != null" >
+        countryn,
+      </if>
+      <if test="provincen != null" >
+        provincen,
+      </if>
+      <if test="cityn != null" >
+        cityn,
+      </if>
+      <if test="remake != null" >
+        remake,
+      </if>
+      <if test="circlepic != null" >
+        circlepic,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="viplv != null" >
+        viplv,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="bannedtime != null" >
+        bannedtime,
+      </if>
+      <if test="standby != null" >
+        standby,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpic != null" >
+        #{userpic,jdbcType=VARCHAR},
+      </if>
+      <if test="chartn != null" >
+        #{chartn,jdbcType=VARCHAR},
+      </if>
+      <if test="mans != null" >
+        #{mans,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="withqq != null" >
+        #{withqq,jdbcType=VARCHAR},
+      </if>
+      <if test="withemail != null" >
+        #{withemail,jdbcType=VARCHAR},
+      </if>
+      <if test="countryn != null" >
+        #{countryn,jdbcType=INTEGER},
+      </if>
+      <if test="provincen != null" >
+        #{provincen,jdbcType=INTEGER},
+      </if>
+      <if test="cityn != null" >
+        #{cityn,jdbcType=INTEGER},
+      </if>
+      <if test="remake != null" >
+        #{remake,jdbcType=VARCHAR},
+      </if>
+      <if test="circlepic != null" >
+        #{circlepic,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="viplv != null" >
+        #{viplv,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bannedtime != null" >
+        #{bannedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="standby != null" >
+        #{standby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.api.wechat.model.UserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from charts_user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update charts_user_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userpic != null" >
+        userpic = #{record.userpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chartn != null" >
+        chartn = #{record.chartn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mans != null" >
+        mans = #{record.mans,jdbcType=INTEGER},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.withqq != null" >
+        withqq = #{record.withqq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.withemail != null" >
+        withemail = #{record.withemail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryn != null" >
+        countryn = #{record.countryn,jdbcType=INTEGER},
+      </if>
+      <if test="record.provincen != null" >
+        provincen = #{record.provincen,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityn != null" >
+        cityn = #{record.cityn,jdbcType=INTEGER},
+      </if>
+      <if test="record.remake != null" >
+        remake = #{record.remake,jdbcType=VARCHAR},
+      </if>
+      <if test="record.circlepic != null" >
+        circlepic = #{record.circlepic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.viplv != null" >
+        viplv = #{record.viplv,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bannedtime != null" >
+        bannedtime = #{record.bannedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.standby != null" >
+        standby = #{record.standby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update charts_user_info
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      userpic = #{record.userpic,jdbcType=VARCHAR},
+      chartn = #{record.chartn,jdbcType=VARCHAR},
+      mans = #{record.mans,jdbcType=INTEGER},
+      password = #{record.password,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      withqq = #{record.withqq,jdbcType=VARCHAR},
+      withemail = #{record.withemail,jdbcType=VARCHAR},
+      countryn = #{record.countryn,jdbcType=INTEGER},
+      provincen = #{record.provincen,jdbcType=INTEGER},
+      cityn = #{record.cityn,jdbcType=INTEGER},
+      remake = #{record.remake,jdbcType=VARCHAR},
+      circlepic = #{record.circlepic,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      viplv = #{record.viplv,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      bannedtime = #{record.bannedtime,jdbcType=TIMESTAMP},
+      standby = #{record.standby,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.api.wechat.model.UserInfo" >
+    update charts_user_info
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpic != null" >
+        userpic = #{userpic,jdbcType=VARCHAR},
+      </if>
+      <if test="chartn != null" >
+        chartn = #{chartn,jdbcType=VARCHAR},
+      </if>
+      <if test="mans != null" >
+        mans = #{mans,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="withqq != null" >
+        withqq = #{withqq,jdbcType=VARCHAR},
+      </if>
+      <if test="withemail != null" >
+        withemail = #{withemail,jdbcType=VARCHAR},
+      </if>
+      <if test="countryn != null" >
+        countryn = #{countryn,jdbcType=INTEGER},
+      </if>
+      <if test="provincen != null" >
+        provincen = #{provincen,jdbcType=INTEGER},
+      </if>
+      <if test="cityn != null" >
+        cityn = #{cityn,jdbcType=INTEGER},
+      </if>
+      <if test="remake != null" >
+        remake = #{remake,jdbcType=VARCHAR},
+      </if>
+      <if test="circlepic != null" >
+        circlepic = #{circlepic,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="viplv != null" >
+        viplv = #{viplv,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bannedtime != null" >
+        bannedtime = #{bannedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="standby != null" >
+        standby = #{standby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.api.wechat.model.UserInfo" >
+    update charts_user_info
+    set username = #{username,jdbcType=VARCHAR},
+      userpic = #{userpic,jdbcType=VARCHAR},
+      chartn = #{chartn,jdbcType=VARCHAR},
+      mans = #{mans,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      withqq = #{withqq,jdbcType=VARCHAR},
+      withemail = #{withemail,jdbcType=VARCHAR},
+      countryn = #{countryn,jdbcType=INTEGER},
+      provincen = #{provincen,jdbcType=INTEGER},
+      cityn = #{cityn,jdbcType=INTEGER},
+      remake = #{remake,jdbcType=VARCHAR},
+      circlepic = #{circlepic,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      viplv = #{viplv,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      bannedtime = #{bannedtime,jdbcType=TIMESTAMP},
+      standby = #{standby,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

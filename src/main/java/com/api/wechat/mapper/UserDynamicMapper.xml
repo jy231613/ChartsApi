@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.api.wechat.mapper.UserDynamicMapper" >
+  <resultMap id="BaseResultMap" type="com.api.wechat.model.UserDynamic" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="withuser" property="withuser" jdbcType="INTEGER" />
+    <result column="dynamictext" property="dynamictext" jdbcType="VARCHAR" />
+    <result column="dynamicpic" property="dynamicpic" jdbcType="VARCHAR" />
+    <result column="dynamicvideo" property="dynamicvideo" jdbcType="VARCHAR" />
+    <result column="dynamicevent" property="dynamicevent" jdbcType="VARCHAR" />
+    <result column="pushtime" property="pushtime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="dynamictype" property="dynamictype" jdbcType="INTEGER" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="dynamiclink" property="dynamiclink" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, withuser, dynamictext, dynamicpic, dynamicvideo, dynamicevent, pushtime, status, 
+    dynamictype, updatetime, dynamiclink
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.api.wechat.model.UserDynamicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from charts_user_dynamic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from charts_user_dynamic
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from charts_user_dynamic
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.api.wechat.model.UserDynamicExample" >
+    delete from charts_user_dynamic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.api.wechat.model.UserDynamic" >
+    insert into charts_user_dynamic (id, withuser, dynamictext, 
+      dynamicpic, dynamicvideo, dynamicevent, 
+      pushtime, status, dynamictype, 
+      updatetime, dynamiclink)
+    values (#{id,jdbcType=INTEGER}, #{withuser,jdbcType=INTEGER}, #{dynamictext,jdbcType=VARCHAR}, 
+      #{dynamicpic,jdbcType=VARCHAR}, #{dynamicvideo,jdbcType=VARCHAR}, #{dynamicevent,jdbcType=VARCHAR}, 
+      #{pushtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{dynamictype,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{dynamiclink,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.api.wechat.model.UserDynamic" >
+    insert into charts_user_dynamic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="withuser != null" >
+        withuser,
+      </if>
+      <if test="dynamictext != null" >
+        dynamictext,
+      </if>
+      <if test="dynamicpic != null" >
+        dynamicpic,
+      </if>
+      <if test="dynamicvideo != null" >
+        dynamicvideo,
+      </if>
+      <if test="dynamicevent != null" >
+        dynamicevent,
+      </if>
+      <if test="pushtime != null" >
+        pushtime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="dynamictype != null" >
+        dynamictype,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="dynamiclink != null" >
+        dynamiclink,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="withuser != null" >
+        #{withuser,jdbcType=INTEGER},
+      </if>
+      <if test="dynamictext != null" >
+        #{dynamictext,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicpic != null" >
+        #{dynamicpic,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicvideo != null" >
+        #{dynamicvideo,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicevent != null" >
+        #{dynamicevent,jdbcType=VARCHAR},
+      </if>
+      <if test="pushtime != null" >
+        #{pushtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="dynamictype != null" >
+        #{dynamictype,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dynamiclink != null" >
+        #{dynamiclink,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.api.wechat.model.UserDynamicExample" resultType="java.lang.Integer" >
+    select count(*) from charts_user_dynamic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update charts_user_dynamic
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.withuser != null" >
+        withuser = #{record.withuser,jdbcType=INTEGER},
+      </if>
+      <if test="record.dynamictext != null" >
+        dynamictext = #{record.dynamictext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dynamicpic != null" >
+        dynamicpic = #{record.dynamicpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dynamicvideo != null" >
+        dynamicvideo = #{record.dynamicvideo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dynamicevent != null" >
+        dynamicevent = #{record.dynamicevent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pushtime != null" >
+        pushtime = #{record.pushtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.dynamictype != null" >
+        dynamictype = #{record.dynamictype,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dynamiclink != null" >
+        dynamiclink = #{record.dynamiclink,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update charts_user_dynamic
+    set id = #{record.id,jdbcType=INTEGER},
+      withuser = #{record.withuser,jdbcType=INTEGER},
+      dynamictext = #{record.dynamictext,jdbcType=VARCHAR},
+      dynamicpic = #{record.dynamicpic,jdbcType=VARCHAR},
+      dynamicvideo = #{record.dynamicvideo,jdbcType=VARCHAR},
+      dynamicevent = #{record.dynamicevent,jdbcType=VARCHAR},
+      pushtime = #{record.pushtime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      dynamictype = #{record.dynamictype,jdbcType=INTEGER},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      dynamiclink = #{record.dynamiclink,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.api.wechat.model.UserDynamic" >
+    update charts_user_dynamic
+    <set >
+      <if test="withuser != null" >
+        withuser = #{withuser,jdbcType=INTEGER},
+      </if>
+      <if test="dynamictext != null" >
+        dynamictext = #{dynamictext,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicpic != null" >
+        dynamicpic = #{dynamicpic,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicvideo != null" >
+        dynamicvideo = #{dynamicvideo,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicevent != null" >
+        dynamicevent = #{dynamicevent,jdbcType=VARCHAR},
+      </if>
+      <if test="pushtime != null" >
+        pushtime = #{pushtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="dynamictype != null" >
+        dynamictype = #{dynamictype,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dynamiclink != null" >
+        dynamiclink = #{dynamiclink,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.api.wechat.model.UserDynamic" >
+    update charts_user_dynamic
+    set withuser = #{withuser,jdbcType=INTEGER},
+      dynamictext = #{dynamictext,jdbcType=VARCHAR},
+      dynamicpic = #{dynamicpic,jdbcType=VARCHAR},
+      dynamicvideo = #{dynamicvideo,jdbcType=VARCHAR},
+      dynamicevent = #{dynamicevent,jdbcType=VARCHAR},
+      pushtime = #{pushtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      dynamictype = #{dynamictype,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      dynamiclink = #{dynamiclink,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
